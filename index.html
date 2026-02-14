@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutraj Dry Fruits</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4}
+header{background:#2e7d32;color:white;text-align:center;padding:20px}
+nav{background:#1b5e20;text-align:center;padding:10px}
+nav button{
+margin:5px;
+padding:8px 15px;
+border:none;
+background:#ff9800;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+.search-bar{
+text-align:center;
+padding:15px;
+}
+.search-bar input{
+width:80%;
+padding:10px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+.card{
+background:white;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+overflow:hidden;
+}
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+.content{padding:15px}
+.price{color:#e65100;font-weight:bold}
+.card button{
+background:#4caf50;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:5px;
+cursor:pointer;
+margin-top:6px;
+}
+footer{
+background:#333;
+color:white;
+text-align:center;
+padding:15px;
+}
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 15px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Nutraj Dry Fruits</h1>
+<p>Premium Quality | 100+ Dry Fruits Available</p>
+<p>📞 +91 78896 95451</p>
+</header>
+
+<nav>
+<button onclick="scrollToTop()">Home</button>
+<button onclick="scrollToProducts()">Products</button>
+<button onclick="viewCart()">View Cart</button>
+<button onclick="contact()">Contact</button>
+<button onclick="window.location.href='https://wa.me/917889695451'">WhatsApp Order</button>
+</nav>
+
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="Search Dry Fruits..." onkeyup="searchProduct()">
+</div>
+
+<div class="products" id="productList"></div>
+
+<footer>
+© 2026 Nutraj Dry Fruits | All Rights Reserved
+</footer>
+
+<a class="whatsapp" href="https://wa.me/917889695451" target="_blank">💬 Order Now</a>
+
+<script>
+
+let cart=[];
+let totalAmount=0;
+
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+function scrollToProducts(){document.getElementById("productList").scrollIntoView({behavior:'smooth'});}
+function contact(){alert("Contact us at +91 78896 95451");}
+function addToCart(name,price){
+cart.push(name+" - ₹"+price);
+totalAmount+=price;
+alert(name+" added to cart");
+}
+function viewCart(){
+if(cart.length===0){
+alert("Cart is empty");
+}else{
+alert("Your Cart:\n\n"+cart.join("\n")+"\n\nTotal: ₹"+totalAmount);
+}
+}
+function searchProduct(){
+let input=document.getElementById("searchInput").value.toLowerCase();
+let cards=document.querySelectorAll(".card");
+cards.forEach(card=>{
+let title=card.querySelector("h3").innerText.toLowerCase();
+card.style.display=title.includes(input)?"block":"none";
+});
+}
+
+const products=[
+// --- 100 Items ---
+["Badam",780],["Kaju",920],["Pista",1050],["Akhrot",650],["Kishmish",420],
+["Munakka",480],["Anjeer",900],["Khajoor",350],["Khubani",720],["Chilgoza",2800],
+["Hazelnut",1200],["Pecan",1350],["Macadamia",1600],["Brazil Nut",1400],["Chestnut",750],
+["Dry Coconut",380],["Magaz",820],["Pumpkin Seeds",600],["Sunflower Seeds",420],["Chia Seeds",700],
+["Flax Seeds",300],["Watermelon Seeds",650],["Sesame Seeds",280],["Cranberry",950],["Blueberry",1100],
+["Dry Mango",520],["Dry Apple",480],["Dry Kiwi",980],["Dry Pineapple",500],["Dry Papaya",460],
+["Dry Strawberry",1200],["Dry Pear",540],["Dry Peach",620],["Dry Plum",680],["Prunes",750],
+["Makhana",900],["Fox Nuts",850],["Supari",400],["Coconut Chips",420],["Tamarind Dry",300],
+["Saffron",250000],["Mamra Badam",1450],["Gurbandi Badam",880],["Iranian Pista",1200],["Afghani Anjeer",1100],
+["Ajwa Dates",1400],["Medjool Dates",1200],["Safawi Dates",1050],["Mabroom Dates",1150],["Kalmi Dates",600],
+["Omani Dates",500],["Tunisian Dates",520],["Black Raisins",460],["Green Raisins",430],["Golden Raisins",500],
+["Pine Nuts",2600],["Apricot",700],["Fig",850],["Mixed Dry Fruits",950],["Trail Mix",880],
+["Roasted Almonds",820],["Roasted Cashew",980],["Salted Pista",1100],["Chocolate Almonds",1250],["Chocolate Cashew",1300],
+["Candied Amla",420],["Dry Ginger",600],["Dry Amla",500],["Dry Banana",450],["Dry Orange Peel",400],
+["Dry Lemon Peel",420],["Dry Pomegranate",1100],["Muskmelon Seeds",700],["Charoli",1600],["Betel Nut",380],
+["Almond Powder",900],["Cashew Powder",1050],["Pista Kernels",1350],["Walnut Kernels",900],["Dry Lychee",1200],
+["Dry Guava",650],["Dry Cherries",1400],["Dry Mulberries",850],["Black Currant",980],["Pineapple Rings",520],
+["Papaya Cubes",480],["Mango Cubes",550],["Seed Mix",750],["Premium Gift Mix",1200],
+["Organic Badam",1050],["Organic Kaju",1150],["Organic Pista",1250],["Organic Raisins",520],["Organic Dates",650],
+["Organic Anjeer",1050],["Organic Walnut",900],["Organic Chia",820],["Organic Pumpkin Seeds",700],
+["Premium Royal Mix",1500],["Extra Special Mix",1700]
+];
+
+const productList=document.getElementById("productList");
+
+products.forEach(item=>{
+let name=item[0];
+let price=item[1];
+let image=https://source.unsplash.com/400x400/?${name},dryfruit;
+
+productList.innerHTML+=`
+<div class="card">
+<img src="${image}">
+<div class="content">
+<h3>${name}</h3>
+<p>${name} is a high-quality dry fruit rich in nutrients, energy, and health benefits.</p>
+<p class="price">₹${price} per kg</p>
+<button onclick="addToCart('${name}',${price})">Add to Cart</button>
+<button onclick="window.location.href='https://wa.me/917889695451'">Order Now</button>
+</div>
+</div>`;
+});
+
+</script>
+
+</body>
+</html>+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutraj Dry Fruits</title>
+<style>
+body{margin:0;font-family:Arial;background:#111;color:#fff}
+header{background:gold;color:#000;padding:15px;text-align:center;font-size:28px;font-weight:bold}
+.hero{text-align:center;padding:30px;background:#222}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px}
+.card{background:#1c1c1c;padding:15px;border-radius:10px;text-align:center;border:1px solid gold}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+button{padding:8px 15px;margin:5px;border:none;border-radius:5px;cursor:pointer;font-weight:bold}
+.buy{background:gold;color:#000}
+.cartbtn{background:#25D366;color:#fff}
+.cart{position:fixed;top:10px;right:10px;background:gold;color:#000;padding:10px;border-radius:8px}
+footer{text-align:center;padding:20px;background:#000;border-top:1px solid gold}
+</style>
+</head>
+<body>
+
+<header>Nutraj Dry Fruits</header>
+
+<div class="hero">
+<h2>100+ Premium Dry Fruits Collection</h2>
+<p>Fresh • Healthy • Hygienic • Direct From Source</p>
+</div>
+
+<div class="cart">
+🛒 Items: <span id="cartCount">0</span>
+</div>
+
+<div class="products" id="productList"></div>
+
+<footer>
+<p>Contact: +91 91030 62708</p>
+<a href="https://wa.me/919103062708" target="_blank">
+<button class="cartbtn">Order on WhatsApp</button>
+</a>
+<p>© 2026 Nutraj Dry Fruits</p>
+</footer>
+
+<script>
+const baseProducts = [
+{name:"Almonds (Badam)",price:800,desc:"Brain boosting dry fruit rich in Vitamin E."},
+{name:"Cashews (Kaju)",price:900,desc:"Creamy and crunchy premium quality."},
+{name:"Walnuts (Akhrot)",price:1000,desc:"Rich in Omega-3 for heart health."},
+{name:"Pistachios (Pista)",price:1100,desc:"Protein rich healthy snack."},
+{name:"Raisins (Kishmish)",price:400,desc:"Natural sweet and iron rich."},
+{name:"Anjeer (Figs)",price:1300,desc:"Improves digestion and immunity."},
+{name:"Dates (Khajoor)",price:500,desc:"Natural energy booster."},
+{name:"Apricots (Khubani)",price:950,desc:"Loaded with antioxidants."},
+{name:"Chilgoza",price:2500,desc:"Premium exotic dry fruit."},
+{name:"Premium Mix",price:1200,desc:"Special healthy mixed pack."}
+];
+
+let cart=0;
+const container=document.getElementById("productList");
+
+for(let i=1;i<=100;i++){
+let item=baseProducts[i%baseProducts.length];
+let product=document.createElement("div");
+product.className="card";
+product.innerHTML=`
+<img src="https://source.unsplash.com/400x300/?nuts,dry-fruits&sig=${i}">
+<h3>${item.name} Pack ${i}</h3>
+<p>${item.desc}</p>
+<p><b>₹${item.price}/kg</b></p>
+<button class="buy" onclick="addCart()">Add to Cart</button>
+<a href="https://wa.me/919103062708" target="_blank">
+<button class="cartbtn">Buy Now</button>
+</a>
+`;
+container.appendChild(product);
+}
+
+function addCart(){
+cart++;
+document.getElementById("cartCount").innerText=cart;
+}
+</script>
+
+</body>
+</html>
